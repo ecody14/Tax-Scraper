@@ -1,5 +1,5 @@
 import json
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
 class ModelUtils:
     @staticmethod
@@ -10,5 +10,6 @@ class ModelUtils:
 
     @staticmethod
     def download_model(model_name):
-        AutoModelForCausalLM.from_pretrained(model_name)
+        quantization_config = BitsAndBytesConfig(load_in_4bit=True)
+        AutoModelForCausalLM.from_pretrained(model_name, quantization_config=quantization_config, device_map="auto")
         AutoTokenizer.from_pretrained(model_name)
