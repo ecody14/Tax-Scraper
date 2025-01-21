@@ -8,7 +8,7 @@ async def main():
     base_url = "https://www.example.com/tax-resources"
 
     # Download the model
-    model_name = "EleutherAI/gpt-neo-1.3B"
+    model_name = "mosaicml/mpt-7b-storywriter"
     ModelUtils.download_model(model_name)
 
     # Initialize the scraper and data processor
