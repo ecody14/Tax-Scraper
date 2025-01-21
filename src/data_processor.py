@@ -1,12 +1,11 @@
-
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 class DataProcessor:
-    def __init__(self, model_path):
-        self.tokenizer = AutoTokenizer.from_pretrained(model_path)
-        self.model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.float16).to("cuda")
-    
+    def __init__(self, model_name):
+        self.tokenizer = AutoTokenizer.from_pretrained(model_name)
+        self.model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16).to("cuda")
+
     def generate_qa_pairs(self, text):
         inputs = self.tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
         inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
